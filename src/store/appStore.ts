@@ -26,9 +26,6 @@ export const useAppStore = defineStore('app', {
         this.currentPage = page;
         this.isLoading = true;
 
-        console.log(this.currentPage);
-        console.log(this.itemsPerPage);
-
         const response = await fetch(
           `${baseUrl}?limit=${this.itemsPerPage}&offset=${
             (this.currentPage - 1) * this.itemsPerPage

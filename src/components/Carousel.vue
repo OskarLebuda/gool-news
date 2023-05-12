@@ -1,6 +1,6 @@
 <template>
   <Carousel class="carousel" @slide-end="handleSlideEnv">
-    <Slide v-for="item in items" :key="slide">
+    <Slide v-for="item in items" :key="item.id">
       <CarouselItem :item="item" />
     </Slide>
   </Carousel>
@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { onMounted } from 'vue';
-import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel';
+import { Carousel, Slide } from 'vue3-carousel';
 import CarouselItem from './CarouselItem.vue';
 import { useAppStore } from '../store/appStore';
 
@@ -17,10 +17,7 @@ const store = useAppStore();
 
 const { items, currentPage, itemsPerPage } = storeToRefs(store);
 
-const handleSlideEnv = (e) => {
-  console.log('Current Slide => ', e.currentSlideIndex + 1);
-  console.log('Load next on', currentPage.value * itemsPerPage.value - 2);
-
+const handleSlideEnv = (e: { currentSlideIndex: number }) => {
   if (e.currentSlideIndex + 1 >= currentPage.value * itemsPerPage.value - 2) {
     store.loadData(currentPage.value + 1);
   }

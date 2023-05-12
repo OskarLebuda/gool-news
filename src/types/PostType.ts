@@ -4,6 +4,7 @@ export namespace PostTypes {
     IMAGE = 'image',
     INFOGRAPHIC = 'infographic',
     GIF = 'gif',
+    NEWS = 'news',
   }
 
   export enum MediaType {
